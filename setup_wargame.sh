@@ -58,6 +58,7 @@ sudo dpkg-reconfigure -plow unattended-upgrades
 # Create main user
 useradd -m -s /bin/bash $REALUSER
 adduser $REALUSER sudo
+passwd $REALUSER
 
 # install ssh key
 HOME_DIR=$(eval echo ~$REALUSER)
