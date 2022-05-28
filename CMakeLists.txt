@@ -7,13 +7,14 @@ enable_testing()
 include_directories("./include")
 
 # Settings
+set(MBE_CPP_FLAGS "-std=c++11")
 set(MBE_FLAGS "-m32 -O0 -fno-inline-functions")
 set(DISABLE_DEP_FLAG "-z execstack")
 set(DISABLE_RELRO_FLAG "-z norelro")
 set(DISABLE_CANARY_FLAG "-fno-stack-protector")
 set(NO_MITS_FLAGS "${DISABLE_DEP_FLAG} ${DISABLE_RELRO_FLAG} ${DISABLE_CANARIES_FLAG}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MBE_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MBE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MBE_FLAGS} ${MBE_CPP_FLAGS}")
 
 # Handy macro
 MACRO(SUBDIRLIST result curdir)
