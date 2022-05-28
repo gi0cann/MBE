@@ -6,10 +6,13 @@
 
 # install pip packages
 function install_pip2s {
-  easy_install -U pip requests
-  pip2 install colorama git+https://github.com/Gallopsled/pwntools#egg=pwntools docopt capstone ropgadget libformatstr xortool
+  python3 -m pip install --upgrade pip
+  python3 -m pip install --upgrade requests
+  python3 -m pip install --upgrade colorama
+  python3 -m pip install --upgrade pwntools
+  python3 -m pip install docopt capstone ropgadget libformatstr xortool
   # capstone is weird
-  cp /usr/local/lib/python2.7/dist-packages/usr/lib/python2.7/dist-packages/capstone/libcapstone.so /usr/lib/libcapstone.so.3
+  cp /usr/local/lib/python3.10/dist-packages/usr/lib/python3.10/dist-packages/capstone/libcapstone.so /usr/lib/libcapstone.so.3
   # patch pwntools in a terrible way
   if [ `uname -i` == 'i686' ]; then
       sed -i 's/platform\.machine()/"i386"/' /usr/local/lib/python2.7/dist-packages/pwnlib/asm.py
@@ -21,26 +24,6 @@ export -f install_pip2s
 function install_gdb_peda {
   OPWD=$PWD
   # remove gdb if it exists on this system
-  apt-get remove -y gdb
-
-  # grab gdb
-  cd /tmp
-  wget -O gdb.pkg.tar.xz http://ftp.gnu.org/gnu/gdb/gdb-7.9.tar.xz
-  tar -Jxf gdb.pkg.tar.xz
-
-  # compile gdb
-  cd gdb-*
-  ./configure --with-python=python2 --prefix=/usr
-  make
-  make install
-  cp -R gdb/data-directory/python /usr/share/gdb
-
-  # remove gdb
-  cd ..
-  rm -rf gdb*
-  echo "gdb hold" | dpkg --set-selections
-  echo "[+] Installed gdb with python2!"
-
   cd $TOOLS_DIR
   git clone https://github.com/longld/peda.git $TOOLS_DIR/peda
   mkdir -p $SKEL_LINK_DIR
