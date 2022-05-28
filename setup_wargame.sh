@@ -52,7 +52,7 @@ touch .hushlogin
 # update and apt-get a ton of stuff
 apt-get update
 apt-get -y upgrade
-apt-get -y install unattended-upgrades htop fonts-inconsolata git gdb gcc gcc-multilib g++ g++-multilib git ltrace linux-source openssh-server python-pip ipython python-dev vim guile-2.0 unzip socat libncurses5-dev texinfo
+apt-get -y install unattended-upgrades htop fonts-inconsolata git gdb gcc gcc-multilib g++ g++-multilib git ltrace linux-source openssh-server python3-pip python3-ipython python3-dev vim guile-2.2 unzip socat libncurses5-dev texinfo
 sudo dpkg-reconfigure -plow unattended-upgrades
 
 # Create main user
